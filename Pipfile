@@ -1,0 +1,51 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+djangorestframework = "*"
+django-cors-headers = "*"
+redis = "==2.10.3"
+django-redis = "==4.3.0"
+gunicorn = "==19.3.0"
+Django = "==4.0.1"
+Markdown = "==2.6.9"
+Pillow = "==9.0.0"
+psycopg2-binary = "*"
+pytz = "*"
+
+[dev-packages]
+flake8 = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+python-semantic-release = "*"
+# Django:
+django-debug-toolbar = "*"
+pytest-django = "*"
+openapi = "*"
+uritemplate = "*"
+pyyaml = "*"
+autopep8 = "*"
+pydocstyle = "*"
+[requires]
+python_version = "3.8"
+
+[scripts]
+coverage = "pytest --cov"
+coverage-html = "pytest --cov --cov-report html --cov-report xml"
+lint = ""
+test = "pytest"
+type = "mypy"
+openapi = "python manage.py generateschema --format openapi --file docs/openapi.yml"
+server = "python manage.py runserver 0.0.0.0:3004"
+migrate = "python manage.py migrate"
+makemigrations = "python manage.py makemigrations"
+
+shell = "python manage.py shell"
+populate_organization_with_study_center = "python manage.py populate_organization_with_study_center"
+spe_daily = "python manage.py spe_daily"
+proto = "python -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. ./legalreports_grpc/contracts/profiles.proto"
+post-install = "./scripts/bootstrap.sh"
