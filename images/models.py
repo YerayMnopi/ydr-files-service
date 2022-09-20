@@ -18,21 +18,21 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
     width = models.PositiveIntegerField(default=0)
     height = models.PositiveIntegerField(default=0)
     image = models.ImageField(
-        upload_to='images/',
+        upload_to='media/',
         blank=False,
     )
     thumbnail = models.ImageField(
-        upload_to='images/',
+        upload_to='media/',
         default=None,
         blank=True
     )
     tablet = models.ImageField(
-        upload_to='images/',
+        upload_to='media/',
         default=None,
         blank=True
     )
     desktop = models.ImageField(
-        upload_to='images/',
+        upload_to='media/',
         default=None,
         blank=True
     )
@@ -46,11 +46,11 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
         self.remove_previous()
 
         self.width, self.height = image.size
-        self.image.save(
-            name=self.rename(),
-            content=self.resize(image, max(self.width, self.height)),
-            save=False
-        )
+        # self.image.save(
+        #     name=self.rename(),
+        #     content=self.resize(image, max(self.width, self.height)),
+        #     save=False
+        # )
 
         self.thumbnail.save(
             name=self.rename('-thumbnail'),
@@ -79,7 +79,6 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
         if self.thumbnail.name and not self.image.name in self.thumbnail.name:
             if os.path.isfile(self.thumbnail.path):
                 os.remove(self.thumbnail.path)
-                os.remove(self.thumbnail.path.replace('-thumbnail', ''))
                 os.remove(self.thumbnail.path.replace('-thumbnail', '-tablet'))
                 os.remove(self.thumbnail.path.replace('-thumbnail', '-desktop'))
 

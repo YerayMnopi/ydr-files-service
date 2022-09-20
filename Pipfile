@@ -43,6 +43,9 @@ openapi = "python manage.py generateschema --format openapi --file docs/openapi.
 server = "python manage.py runserver 0.0.0.0:3004"
 migrate = "python manage.py migrate"
 makemigrations = "python manage.py makemigrations"
+admin = "python manage.py createsuperuser"
+create_database = "./restore_data.sh"
+
 
 shell = "python manage.py shell"
 populate_organization_with_study_center = "python manage.py populate_organization_with_study_center"

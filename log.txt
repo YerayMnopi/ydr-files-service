@@ -1,0 +1,15 @@
+DROP AND CREATE DATABASES
+DROP AND CREATE DATABASES
+ pg_terminate_backend 
+----------------------
+(0 rows)
+
+DROP DATABASE
+CREATE DATABASE
+DROP AND CREATE DATABASES
+ pg_terminate_backend 
+----------------------
+(0 rows)
+
+DROP DATABASE
+CREATE DATABASE
