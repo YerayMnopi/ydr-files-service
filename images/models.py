@@ -1,3 +1,4 @@
+from pickletools import optimize
 from django.db import models
 
 import io, os
@@ -55,7 +56,7 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
         self.thumbnail.save(
             name=self.rename('-thumbnail'),
             content=self.resize(image, 800, 192),
-            save=False
+            save=False,
         )
 
         self.tablet.save(
@@ -73,7 +74,7 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
         super(ResponsiveImage, self).save()
 
     def rename(self, extra_string=''):
-        return self.slug + extra_string + '.jpg'
+        return self.slug + extra_string + '.webp'
 
     def remove_previous(self):
         if self.thumbnail.name and not self.image.name in self.thumbnail.name:
@@ -84,7 +85,7 @@ class ResponsiveImage(UpdateableMixin, SlugeableMixin):
 
     def resize(self, image, edge, dpi=72):
         content = io.BytesIO()
-        image.resize(self.scale(edge), Image.ANTIALIAS).save(fp=content, format='JPEG', dpi=[dpi, dpi])
+        image.resize(self.scale(edge), Image.ANTIALIAS).save(fp=content, format='webp', optimize=True, dpi=[dpi, dpi])
         return ContentFile(content.getvalue())
 
     def scale(self, long_edge):
